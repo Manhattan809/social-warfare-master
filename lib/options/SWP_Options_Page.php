@@ -588,37 +588,26 @@ class SWP_Options_Page extends SWP_Option_Abstract {
                 ->set_priority( 20 )
                 ->set_default( '' );
 
-            //* facebookPublisherUrl => facebook_publisher_url
-            $facebook_publisher_url = new SWP_Option_Text( __( 'Facebook Page URL', 'social-warfare' ), 'facebook_publisher_url' );
-            $facebook_publisher_url->set_size( 'sw-col-300' )
+            //* facebookID => facebook_id
+            $facebook_id = new SWP_Option_Text( __( 'Facebook Username', 'social-warfare' ), 'facebook_id' );
+            $facebook_id->set_size( 'sw-col-300' )
                 ->set_priority( 30 )
                 ->set_default( '' );
-
-            //* facebookAppID => facebook_app_id
-            $facebook_app_id = new SWP_Option_Text( __( 'Facebook App ID', 'social-warfare' ), 'facebook_app_id' );
-            $facebook_app_id->set_size( 'sw-col-300' )
-                ->set_priority( 40 )
-                ->set_default( '' );
             
-            //* pinterestID => linkedin_id
+            //* linkedinID => linkedin_id
             $linkedin_id = new SWP_Option_Text( __( 'Linkedin Username', 'social-warfare' ), 'linkedin_id' );
             $linkedin_id->set_size( 'sw-col-300' )
+                ->set_priority( 50 )
+                ->set_default( '' );
+            
+            //* googleID => google_plus_id
+            $google_plus_id = new SWP_Option_Text( __( 'Google Plus Username', 'social-warfare' ), 'google_plus_id' );
+            $google_plus_id->set_size( 'sw-col-300' )
                 ->set_priority( 60 )
                 ->set_default( '' );
             
-            //* GoogleID => google_plus_id
-            $google_plus_id = new SWP_Option_Text( __( 'Google Plus Username', 'social-warfare' ), 'google_plus_id' );
-            $google_plus_id->set_size( 'sw-col-300' )
-                ->set_priority( 70 )
-                ->set_default( '' );
-            
-            //* GoogleAPIKey => google_plus_api_key
-            $google_plus_api_key = new SWP_Option_Text( __( 'Google Plus API Key', 'social-warfare' ), 'google_plus_api_key' );
-            $google_plus_api_key->set_size( 'sw-col-300' )
-                ->set_priority( 80 )
-                ->set_default( '' );
 
-        $sitewide_identity->add_options( [$twitter_id, $linkedin_id, $pinterest_id, $facebook_publisher_url, $facebook_app_id, $google_plus_id, $google_plus_api_key] );
+        $sitewide_identity->add_options( [$twitter_id, $linkedin_id, $pinterest_id, $facebook_id, $google_plus_id] );
 
         $social_identity->add_section( $sitewide_identity );
 

@@ -403,9 +403,12 @@ class Social_Warfare {
 			'Google_Plus',
 			'Facebook',
 			'Twitter',
-            'Linkedin',
-            'Pinterest',
-            'Mix'
+                        'Linkedin',
+                        'Pinterest',
+                        'Tumblr',
+                        'Reddit',
+                        'Yummly',
+                        'Mix'
 		);
 		$this->load_files( '/lib/social-networks/', $social_networks);
 

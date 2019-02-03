@@ -606,6 +606,15 @@ p.sw-subtitle.sw-registration-text {
 	border-color: #27313f;
 }
 
+.sw-youTube-icon:before {
+	content: 'y';
+}
+
+.sw-s.sw-youTube-icon {
+	background-color: #39475d;
+	border-color: #27313f;
+}
+
 .sw-mix-icon:before {
 	content: 'g';
 }

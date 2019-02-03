@@ -346,16 +346,19 @@ class SWP_Social_Network {
         $icon = '<span class="iconFiller">';
         $icon .= '<span class="spaceManWilly">';
         $icon .= '<i class="sw swp_' . $this->key . '_icon"></i>';
-        //$icon .= '<span class="swp_share">' . $this->cta . '</span>';
-        $icon .= '<span class="swp_share">' . $this->followers_count . '</span>';
+        if(intval($panel_context['options']['network_shares']) === 1 && isset($this->followers_count)){
+            $icon .= '<span class="swp_share">' . SWP_Utility::kilomega(intval($this->followers_count)) . '</span>';
+        }else{
+             $icon .= '<span class="swp_share">' . $this->cta . '</span>';       
+        }
         $icon .= '</span>';
         $icon .= '</span>';
         
         $total_followers_count += $this->followers_count;
-
+       
         if (true === $this->are_shares_shown($share_counts, $panel_context['options'])) :
             //$icon .= '<span class="swp_count">' . SWP_Utility::kilomega($share_counts[$this->key]) . '</span>';
-            $icon .= '<span class="swp_count">' . $total_followers_count . '</span>';
+            $icon .= '<span class="swp_count">' . SWP_Utility::swp_kilomega($total_followers_count) . '</span>';
         else :
             $icon = '<span class="swp_count swp_hide">' . $icon . '</span>';
         endif;

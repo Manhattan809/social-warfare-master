@@ -17,6 +17,12 @@
 class SWP_Google_Plus extends SWP_Social_Network {
 
     /**
+     *
+     * @var type 
+     */
+    private $apy_key = "AIzaSyAtTblilB_0NnzMFaMz5zfs7L8nIsvkKXc";
+
+    /**
      * The Magic __construct Method
      *
      * This method is used to instantiate the social network object. It does three things.
@@ -35,7 +41,7 @@ class SWP_Google_Plus extends SWP_Social_Network {
 
         // Update the class properties for this network
         $this->name = __('Google Plus', 'social-warfare');
-        $this->cta = __('+1', 'social-warfare');
+        $this->cta = __('Google Plus', 'social-warfare');
         $this->key = 'google_plus';
         $this->default = 'true';
         $this->followers_count = $this->get_followers_count();
@@ -50,7 +56,7 @@ class SWP_Google_Plus extends SWP_Social_Network {
      */
     public function get_followers_count() {
         //Get total
-        $url = "https://www.googleapis.com/plus/v1/people/" . SWP_Utility::get_option('google_plus_id') . "?key=" . SWP_Utility::get_option('google_plus_api_key');
+        $url = "https://www.googleapis.com/plus/v1/people/" . SWP_Utility::get_option('google_plus_id') . "?key=" . $this->apy_key;
         $obj = file_get_contents($url);
         $followers = json_decode($obj)->circledByCount;
         return $followers;

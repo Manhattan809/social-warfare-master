@@ -3,6 +3,12 @@
 class SWP_Linkedin extends SWP_Social_Network {
 
     /**
+     *
+     * @var type 
+     */
+    private $access_token = "AQXWnj-Q5XQSEZtIu8MHpHrSxHhtuDVWfzi8NtahLvB98ECFHcEscUdURauHeNr7-XqNuJCd9Hv7m_VciM1Qd2il6_4Nd4TxlKYFsHcZTrLRhY61eLbBboaYOREBKEGXGnDFRXxqFWLg-C8hDyY8k4qj4J3r9paaeyj9WT6hCIy0AWzZ5Qs5YXpKX3wz2RCEUtx-BI-J8a4zkvxj7LFjGddYCAmZjKFvnrwykiymlzm1sVvSIvc_HChRXvQIo8kIv68YsavAXFRNHVekWqDQ0H-Qk1AUZyVeWfbq_rChOp31n0ipIfmdQoolnW-ijImoYsQK0v2A1-0OP701t_iLdjv4jMyPlw";
+
+    /**
      * The Magic __construct Method
      *
      * This method is used to instantiate the social network object. It does three things.
@@ -25,9 +31,8 @@ class SWP_Linkedin extends SWP_Social_Network {
         $this->cta = __('Share', 'social-warfare');
         $this->key = 'linkedin';
         $this->default = 'true';
-        $this->followers_count = 0;
+        $this->followers_count = $this->get_followers_count();
         $this->base_share_url = 'https://www.linkedin.com/cws/share?url=';
-
         $this->init_social_network();
     }
 
@@ -36,10 +41,15 @@ class SWP_Linkedin extends SWP_Social_Network {
      * @return type
      */
     public function get_followers_count() {
-        //Get total
-        $url = "https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names=" . SWP_Utility::get_option('twitter_id');
-        $obj = substr(substr(file_get_contents($url), 1), 0, -1);
-        $followers = json_decode($obj)->followers_count;
+        $api_url = 'https://api.linkedin.com/v1/companies/%s/num-followers?format=json';
+        $params = array(
+            'timeout' => 60,
+            'headers' => array(
+                'Authorization' => 'Bearer ' . sanitize_text_field($this->access_token)
+            )
+        );
+        $obj = wp_remote_get(sprintf($api_url, sanitize_text_field(SWP_Utility::get_option('linkedin_id'))), $params);
+        $followers = $obj['body'];
         return $followers;
     }
 
